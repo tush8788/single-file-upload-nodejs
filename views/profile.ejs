@@ -1,0 +1,19 @@
+<section>
+    <h1>Profile</h1>
+    <div id="user-container">
+        <%if(locals.user.id==profile_user.id){%>
+            <!-- update users info if sign in user and click user is same -->
+            <form action="/user/update" method="post">
+                <label for="">Name: </label>
+                <input type="text" name="name" value="<%=profile_user.name%>" required><br>
+                <label for="">Email: </label>
+                <input type="email" name="email" value="<%=profile_user.email%>" required><br>
+                <input type="hidden" name="id" value="<%=profile_user.id%>" required><br>&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Update">
+            </form>
+        <%}else{%>
+            <p><%=profile_user.name%></p>
+            <p><%=profile_user.email%></p>
+        <%}%>
+    </div>
+</section>

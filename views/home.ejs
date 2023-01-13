@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<main id="home-container">
+    <section id="feed-post">
+            <!-- if user is sign in then only display post form -->
+            <%if(locals.user){%>
+                <form action="/post/create" id="createPost" method="post">
+                    <textarea name="containt" id="" cols="20" rows="5" placeholder="Text here..."
+                        required></textarea><br>
+                    <button type="submit">Post</button>
+                </form>
+            <%}%>
+                
+            <!--display all posts and comments-->
+            <ul id="post-container">
+                <!-- adding parcials -->
+                <%-include('_post')-%>
+            </ul>
+    </section>
+
+    <section id="user-friend">
+        <h3>Friends</h3>
+        <% for(let u of all_users){%>
+            <a href="/user/profile/<%=u.id%>">
+                <p><%=u.name%></p>
+            </a>    
+        <%}%>
+    </section>
+
+
+    <!-- post ajax req -->
+    <script src="/js/Ajax_post.js"> </script>
+
+    <!-- comment ajax req -->
+    <script src="/js/Ajax_comments.js"> </script>
+  
+    <!-- for show notificaion using ajax -->
+    <script src="/js/noty.js"></script>
+
+</main>

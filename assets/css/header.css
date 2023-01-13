@@ -1,0 +1,25 @@
+body{
+    margin: 0;
+}
+header{
+    display: flex;
+    color: white;
+    background-color: yellowgreen;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#links{
+    margin: 5px 10px 0px 0px;
+}
+
+#links ul li{
+    display: inline-block;
+    margin-left: 5px;
+    
+}
+.text-deco-none{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
