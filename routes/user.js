@@ -28,6 +28,6 @@ router.post('/create-session',passport.authenticate(
     ),userController.createSession);
 
 //update users information
-router.post('/update',passport.checkAuthentication,userController.updateUserInfo);
+router.post('/update/:id',passport.checkAuthentication,userController.updateUserInfo);
 
 module.exports=router;

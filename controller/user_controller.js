@@ -1,5 +1,7 @@
 const UserDB = require('../models/user');
 const cookieParser = require('cookie-parser');
+const fs =require('fs');
+const path=require('path');
 //using async await
 
 //sign in page
@@ -105,13 +107,48 @@ module.exports.signOut = async function (req, res) {
 
 //update user 
 module.exports.updateUserInfo = async function (req, res) {
-
-    try {
-        await UserDB.findByIdAndUpdate(req.body.id, { name: req.body.name, email: req.body.email })
-
-        return res.redirect("back");
-    } catch (err) {
-        console.log("Error in updating user :: ", err);
-        return;
+    if(req.user.id==req.params.id){
+        try {
+            //console.log(req.body);
+            
+            // await UserDB.findByIdAndUpdate(req.body.id, { name: req.body.name, email: req.body.email })
+            let user=await UserDB.findById(req.params.id);
+            //accessing multipart data
+            UserDB.uploadedAvatar(req,res,function(err){
+                // console.log(req.file);
+                user.name=req.body.name;
+                user.email=req.body.email;
+                // console.log(UserDB.avatarPath);
+                if(req.file){
+                    // check user avatar is already upload 
+                    if(user.avatar){
+                        //check user avatar path file avalable in folder
+                        if(fs.existsSync(path.join(__dirname,"..",user.avatar))){
+                            //if file avalable then delete 
+                             fs.unlinkSync(path.join(__dirname,"..",user.avatar))
+                        }
+                        else{
+                            console.log("File not exist");
+                        }
+                    }
+                    //avatarPath is a static veriable to store folder path 
+                    //avatarPath store inside models->user.js
+                    //this is saving path inside of uploading the file into the avatar fild into the user
+                    user.avatar=UserDB.avatarPath+"/"+req.file.filename
+                }
+                user.save();
+                
+                return res.redirect("back");
+            })
+        } catch (err) {
+            console.log("Error in updating user :: ", err);
+            return;
+        }
     }
+    else{
+        res.flash("error","user not match");
+        // console.log("user not match ");
+        return res.redirect('back');
+    }
+    
 }

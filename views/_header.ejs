@@ -4,6 +4,7 @@
     <div id="links">
         <ul>
             <% if(locals.user){%>
+                <li><img src="<%=user.avatar%>" alt="" width="20" height="20"></li>
                 <li><a class="text-deco-none" href="/">Home</a></li>
                 <li><a class="text-deco-none" href="/user/profile/<%=locals.user.id%>"><%=locals.user.name%></a></li>
                 <li><a class="text-deco-none" href="/user/signout">Sign out</a></li>
