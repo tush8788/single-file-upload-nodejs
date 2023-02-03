@@ -1,9 +1,9 @@
 
 function NotyMessage(noty){
-    console.log(noty);
+    // console.log(noty);
     if(noty.status == "success"){
         new Noty({
-            theme:'relax',
+            theme:'metroui',
             text:noty.message,
             type:'success',
             layout:'topRight',

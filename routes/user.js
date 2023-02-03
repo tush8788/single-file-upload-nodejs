@@ -26,7 +26,7 @@ router.post('/create-session',passport.authenticate(
     'local',
     {failureRedirect:'/user/signin'}
     ),userController.createSession);
-
+// console.log(__dirname);
 //update users information
 router.post('/update/:id',passport.checkAuthentication,userController.updateUserInfo);
 

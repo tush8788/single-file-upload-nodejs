@@ -1,20 +1,18 @@
 <%for(let i of posts){%>
     <li id="post-<%=i.id%>">
-       
-            <h2>
-                <!-- chicking user authorize to delete post or not -->
-                <%if(locals.user && i.user.id==locals.user._id){%>   
-                    <a class="delete-post-btn" href="/post/delete/<%=i.id%>">X</a>
-                <%}%>
-                <!-- showing post -->
-                <%=i.containt%><br>
-                <!-- showing user of post or who created this post -->
-                <small>
-                    <%=i.user.name%>
-                </small>
-            </h2>
-        
-
+        <h2>
+            <!-- chicking user authorize to delete post or not -->
+            <%if(locals.user && i.user.id==locals.user._id){%>   
+                <a class="delete-post-btn" href="/post/delete/<%=i.id%>">X</a>
+            <%}%>
+            <!-- showing post -->
+            <%=i.containt%><br>
+            <!-- showing user of post or who created this post -->
+            <small>
+                <%=i.user.name%>
+            </small>
+        </h2>
+    
         <!-- Comments -->
         <div class="Comment-container">
             <!-- first check user is sign in to create comment -->

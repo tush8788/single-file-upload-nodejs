@@ -5,7 +5,7 @@
         <%if(locals.user.id==profile_user.id){%>
             
             <!-- update users info if sign in user and click user is same -->
-            <form action="/user/update/<%=profile_user.id%>" enctype="multipart/form-data" method="post">
+            <form action="/user/update/<%=profile_user.id%>" id="update-user-profile" enctype="multipart/form-data" method="post">
                 <label for="">Name: </label>
                 <input type="text" name="name" value="<%=profile_user.name%>" required><br>
                 <label for="">Email: </label>
@@ -20,3 +20,5 @@
         <%}%>
     </div>
 </section>
+<!-- update user profile with AJAX -->
+<script src="/js/AJAX_update_user_profile.js"></script>

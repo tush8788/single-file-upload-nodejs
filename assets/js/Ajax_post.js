@@ -51,14 +51,13 @@
                             ${postUser}
                         </small>
                     </h2>
-                
-        
+            
                 <!-- Comments -->
                 <div class="Comment-container">
                     <!-- first check user is sign in to create comment -->
                    
                        <div class="comment-form">
-                            <form action="/comment/create" method="post">
+                            <form action="/comment/create"  id="createComment" method="post">
                                 <input type="text" name="containt" placeholder="Comment here.."required>
                                 <input type="hidden" name="postId" value="${post._id}"><br>
                                 <input type="submit" value="Comment">
@@ -67,12 +66,13 @@
                    
                     <!-- display all comments -->
                     <div class="comment-display">
-                        <ul id="post-comment-${post._id}">
-                            
+                        <ul id="comment-list-container">
+                        
                         </ul>
                     </div>
                 </div>
             </li>
+            <script src="/js/Ajax_comments.js"></script>
        `)
     }
 
@@ -111,15 +111,15 @@
  // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
  let convertPostsToAjax = function(){
     $('#post-container>li').each(function(){
-        console.log(this);
+        // console.log(this);
         let self = $(this);
         let deleteButton = $(' .delete-post-btn', self);
-        console.log("delete btn :: ",deleteButton)
+        // console.log("delete btn :: ",deleteButton)
         deletePost(deleteButton);
 
         // get the post's id by splitting the id attribute
-        let postId = self.prop('id').split("-")[1]
-        console.log("id :: ",postId);
+        // let postId = self.prop('id').split("-")[1]
+        // console.log("id :: ",postId);
         // new PostComments(postId);
     });
 }

@@ -109,7 +109,7 @@ module.exports.signOut = async function (req, res) {
 module.exports.updateUserInfo = async function (req, res) {
     if(req.user.id==req.params.id){
         try {
-            //console.log(req.body);
+            // console.log(req.body);
             
             // await UserDB.findByIdAndUpdate(req.body.id, { name: req.body.name, email: req.body.email })
             let user=await UserDB.findById(req.params.id);
@@ -137,7 +137,12 @@ module.exports.updateUserInfo = async function (req, res) {
                     user.avatar=UserDB.avatarPath+"/"+req.file.filename
                 }
                 user.save();
-                
+                if(req.xhr){
+                    return res.status(200).json({
+                        message:"upload successfully",
+                        user:user
+                    })
+                }
                 return res.redirect("back");
             })
         } catch (err) {
